@@ -1,0 +1,5 @@
+git clone https://github.com/TonyKerguen/Python-1A.git
+cd Python-1A/
+git add .
+git commit -m "message"
+git push
