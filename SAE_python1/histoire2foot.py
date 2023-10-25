@@ -107,6 +107,9 @@ def match_est_correct(match):
     return len(match) == 9 and type(match[0]) == str and type(match[1]) == str and type(match[2]) == str and type(match[5]) == str and type(match[6]) == str and type(match[7]) == str and type(match[3]) == int and type(match[4]) == int and type(match[8]) == bool
 
 
+
+
+
 def equipe_gagnante(match):
     """retourne le nom de l'équipe qui a gagné le match. Si c'est un match nul on retourne None
 
@@ -223,7 +226,25 @@ def fusionner_matchs(liste_matchs1, liste_matchs2):
     Returns:
         list: la liste triée sans doublon comportant tous les matchs de liste_matchs1 et liste_matchs2
     """ 
-    
+    res =[]
+    ind1 = 0
+    ind2 = 0
+    while ind1 < len(liste_matchs1) and ind2 < len(liste_matchs2):
+        if liste_matchs1[ind1] == liste_matchs2[ind2]:
+            ind1 += 1
+        elif est_bien_trie([liste_matchs1[ind1],liste_matchs2[ind2]]):
+            res.append(liste_matchs1[ind1])
+            ind1 += 1
+        else :
+            res.append(liste_matchs2[ind2])
+            ind2 += 1
+    while ind1 == len(liste_matchs1) and ind2 < len(liste_matchs2):
+        res.append(liste_matchs2[ind2])
+        ind2 += 1
+    while ind2 == len(liste_matchs2) and ind1 < len(liste_matchs1):
+        res.append(liste_matchs1[ind1])
+        ind1 += 1
+    return res
 
 
 def resultats_equipe(liste_matchs, equipe):
@@ -365,10 +386,17 @@ def charger_matchs(nom_fichier):
     Returns:
         list: la liste des matchs du fichier
     """    
-    ...
+    fic = open(nom_fichier, 'r')
+    fic.readline()
+    res = []
+    for ligne in fic:
+        l_champs = ligne.split(",")
+        res.append((str(l_champs[0]), str(l_champs[1]), str(l_champs[2]), int(l_champs[3]), int(l_champs[4]), str(l_champs[5]), str(l_champs[6]), str(l_champs[7]), eval(l_champs[8][0].upper()+l_champs[8][1:-1].lower())))
+    fic.close()
+    return res
 
 
-def sauver_matchs(liste_matchs,nom_fichier):
+def sauver_matchs(liste_matchs, nom_fichier):
     """sauvegarde dans un fichier au format CSV une liste de matchs
 
     Args:
@@ -378,7 +406,11 @@ def sauver_matchs(liste_matchs,nom_fichier):
     Returns:
         None: cette fonction ne retourne rien
     """    
-    ...
+    fic = open(nom_fichier, 'w')
+    fic.write("date,home_team,away_team,home_score,away_score,tournament,city,country,neutral\n")
+    for match in liste_matchs:
+        fic.write(match[0]+","+match[1]+","+match[2]+","+str(match[3])+","+str(match[4])+","+match[5]+","+match[6]+","+match[7]+","+str(match[8])+"\n")
+    fic.close()
 
 
 # Fonctions à implémenter dont il faut également implémenter les tests
@@ -439,7 +471,17 @@ def meilleures_equipes(liste_matchs):
     Returns:
         list: la liste des équipes qui ont le plus petit nombre de defaites
     """
-    ...
+    res = []
+    liste_equipes = liste_des_equipes(liste_matchs)
+    min_def = None
+    for equipe in liste_equipes:
+        if min_def == None or resultats_equipe(liste_matchs, equipe)[2] < min_def:
+            min_def = resultats_equipe(liste_matchs, equipe)[2]
+            res = []
+            res.append(equipe)
+        elif resultats_equipe(liste_matchs, equipe)[2] == min_def:
+            res.append(equipe)
+    return res
 
 
 
