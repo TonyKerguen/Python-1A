@@ -10,7 +10,7 @@ def afficher_menu(titre="met un titre bro ?", liste_options=["met au moins une o
     print("| "+str(titre)+" |")
     print("+-"+"-"*len(titre)+"-+")
     for option in range(len(liste_options)):
-        print(" "+str(option+1)+" -> "+liste_options[option])
+        print(" "+str(option+1)+" -> "+str(liste_options[option]))
     # print("Entrez votre choix [1-"+str(len(liste_options))+"]")
 
 # afficher_menu()
@@ -19,7 +19,7 @@ def afficher_menu(titre="met un titre bro ?", liste_options=["met au moins une o
 def demander_nombre(message, borne_max):
     res = input(message)
     try:
-        if 0 < int(res) <= borne_max+1:
+        if 0 < int(res) <= borne_max:
             return int(res)
         return None
     except:

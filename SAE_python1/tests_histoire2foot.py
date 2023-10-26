@@ -142,7 +142,7 @@ def test_nombre_moyen_buts():
      liste1.append(match_incorrecte)
      assert histoire2foot.nombre_moyen_buts(liste1,'Friendly') is None
      liste1.remove(liste1[-1])
-     assert histoire2foot.nombre_moyen_buts(liste1,'AAAAAAAAAAAAA') == 0
+     assert histoire2foot.nombre_moyen_buts(liste1,'AAAAAAAAAAAAA') == None
      assert histoire2foot.nombre_moyen_buts([],'Friendly') == 0
 
 def test_est_bien_trie():

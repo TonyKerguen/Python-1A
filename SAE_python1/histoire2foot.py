@@ -107,9 +107,6 @@ def match_est_correct(match):
     return len(match) == 9 and type(match[0]) == str and type(match[1]) == str and type(match[2]) == str and type(match[5]) == str and type(match[6]) == str and type(match[7]) == str and type(match[3]) == int and type(match[4]) == int and type(match[8]) == bool
 
 
-
-
-
 def equipe_gagnante(match):
     """retourne le nom de l'équipe qui a gagné le match. Si c'est un match nul on retourne None
 
@@ -191,7 +188,9 @@ def nombre_moyen_buts(liste_matchs, nom_competition):
                 nb_match += 1
         else:        
             return None
-    if nb_match == 0:
+    if nb_match == 0 and nb_match == 0:
+        return None
+    if nb_match == 0 :
         return 0
     return nb_but/nb_match
 
@@ -257,19 +256,22 @@ def resultats_equipe(liste_matchs, equipe):
     Returns:
         tuple: un triplet d'entiers contenant le nombre de victoires, nuls et défaites de l'équipe
     """    
-    res = (0,0,0)
+    nb_vic = 0
+    nb_nul = 0
+    nb_def = 0
     for match in range(len(liste_matchs)):
         if match_est_correct(liste_matchs[match]):
             if liste_matchs[match][1] or liste_matchs[match][2] == equipe:
-                if equipe_gagnante[match] == equipe:
-                    res[0] += 1
-                elif equipe_gagnante[match] == None:
-                    res[1] += 1
+                equipe_win = equipe_gagnante(liste_matchs[match])
+                if equipe_win == None:
+                    nb_nul += 1
+                elif equipe_win == equipe:
+                    nb_vic += 1
                 else:
-                    res[2] += 1
+                    nb_def += 1
         else:
             return None
-    return res
+    return (nb_vic, nb_nul, nb_def)
 
 
 
@@ -386,7 +388,7 @@ def charger_matchs(nom_fichier):
     Returns:
         list: la liste des matchs du fichier
     """    
-    fic = open(nom_fichier, 'r')
+    fic = open(nom_fichier, 'r', encoding="utf-8")
     fic.readline()
     res = []
     for ligne in fic:
@@ -394,6 +396,8 @@ def charger_matchs(nom_fichier):
         res.append((str(l_champs[0]), str(l_champs[1]), str(l_champs[2]), int(l_champs[3]), int(l_champs[4]), str(l_champs[5]), str(l_champs[6]), str(l_champs[7]), eval(l_champs[8][0].upper()+l_champs[8][1:-1].lower())))
     fic.close()
     return res
+
+# print(charger_matchs("histoire1.csv"))
 
 
 def sauver_matchs(liste_matchs, nom_fichier):
@@ -406,7 +410,7 @@ def sauver_matchs(liste_matchs, nom_fichier):
     Returns:
         None: cette fonction ne retourne rien
     """    
-    fic = open(nom_fichier, 'w')
+    fic = open(nom_fichier, 'w', encoding="utf-8")
     fic.write("date,home_team,away_team,home_score,away_score,tournament,city,country,neutral\n")
     for match in liste_matchs:
         fic.write(match[0]+","+match[1]+","+match[2]+","+str(match[3])+","+str(match[4])+","+match[5]+","+match[6]+","+match[7]+","+str(match[8])+"\n")
@@ -483,7 +487,7 @@ def meilleures_equipes(liste_matchs):
             res.append(equipe)
     return res
 
-
+print(resultats_equipe(charger_matchs("histoire1.csv"), "aaa"))
 
 
 
