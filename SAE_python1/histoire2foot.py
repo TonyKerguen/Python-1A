@@ -261,12 +261,12 @@ def resultats_equipe(liste_matchs, equipe):
     nb_def = 0
     for match in range(len(liste_matchs)):
         if match_est_correct(liste_matchs[match]):
-            if liste_matchs[match][1] or liste_matchs[match][2] == equipe:
+            if liste_matchs[match][1] == equipe or liste_matchs[match][2] == equipe:
                 equipe_win = equipe_gagnante(liste_matchs[match])
-                if equipe_win == None:
-                    nb_nul += 1
-                elif equipe_win == equipe:
+                if equipe_win == equipe:
                     nb_vic += 1
+                elif equipe_win == None:
+                    nb_nul += 1
                 else:
                     nb_def += 1
         else:
@@ -487,7 +487,7 @@ def meilleures_equipes(liste_matchs):
             res.append(equipe)
     return res
 
-print(resultats_equipe(charger_matchs("histoire1.csv"), "aaa"))
+print(resultats_equipe(charger_matchs("histoire1.csv"), "Scotland"))
 
 
 
