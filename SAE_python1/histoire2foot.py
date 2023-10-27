@@ -279,7 +279,7 @@ def est_bien_trie(liste_matchs):
         bool: True si la liste est bien triée et False sinon
     """
     for match in range(1, len(liste_matchs)):
-        if match_est_correct(liste_matchs[match]):
+        if match_est_correct(liste_matchs[match]) and match_est_correct(liste_matchs[match-1]):
             if liste_matchs[match][0] < liste_matchs[match-1][0] or liste_matchs[match][0] == liste_matchs[match-1][0] and liste_matchs[match][1] < liste_matchs[match-1][1]:
                 return False
         else:
@@ -439,11 +439,12 @@ def nb_matchs_sans_defaites(liste_matchs, equipe):
     Returns:
         int: le plus grand nombre de matchs consécutifs sans défaite du pays nom_pays
     """
+    # Pour cette fonction je ne savais pas si un match nul annulait la serie de victoire. J'ai consideré que non. Si un match nul annule la série de victoire il faut prendre la fonction en commentaire juste en dessous de celle-ci, c'est la même chose pour mes test.
     serie_match_sans_defaite = 0
     max_serie_match_sans_defaite = 0
     for match in liste_matchs:
         if match_est_correct(match):
-            if (match[1] == equipe or match[2] == equipe) and equipe_gagnante(match) == equipe:
+            if (match[1] == equipe or match[2] == equipe) and (equipe_gagnante(match) == equipe or equipe_gagnante(match) is None):
                 serie_match_sans_defaite += 1
                 if serie_match_sans_defaite > max_serie_match_sans_defaite:
                     max_serie_match_sans_defaite = serie_match_sans_defaite
@@ -452,6 +453,19 @@ def nb_matchs_sans_defaites(liste_matchs, equipe):
         else:
             return None
     return max_serie_match_sans_defaite
+    # serie_match_sans_defaite = 0
+    # max_serie_match_sans_defaite = 0
+    # for match in liste_matchs:
+    #     if match_est_correct(match):
+    #         if (match[1] == equipe or match[2] == equipe) and equipe_gagnante(match) == equipe :
+    #             serie_match_sans_defaite += 1
+    #             if serie_match_sans_defaite > max_serie_match_sans_defaite:
+    #                 max_serie_match_sans_defaite = serie_match_sans_defaite
+    #         elif (match[1] == equipe or match[2] == equipe) and equipe_gagnante(match) != equipe:
+    #             serie_match_sans_defaite = 0
+    #     else:
+    #         return None
+    # return max_serie_match_sans_defaite
 
 
 def charger_matchs(nom_fichier):
@@ -537,6 +551,7 @@ def matchs_spectaculaires(liste_matchs):
             if match[3] + match[4] > nb_buts_max:
                 res = []
                 res.append(match)
+                nb_buts_max = match[3] + match[4]
             elif match[3] + match[4] == nb_buts_max:
                 res.append(match)
         else:
