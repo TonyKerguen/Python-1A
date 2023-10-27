@@ -190,6 +190,56 @@ def programme_principal():
                 else:
                     print(
                         "Voici la liste de toutes les équipe qui ont particper à des matchs : "+str(liste_equipes))
+        # Option 9
+        if rep == 9:
+            if liste_matchs == None:
+                print("Il faut charger un fichier avant !\n")
+            else:
+                date_prem_vic = histoire2foot.premiere_victoire(liste_matchs, input("De quelle équipe veux tu la date de sa premiere victoire ? "))
+                if date_prem_vic == None:
+                    print("Cette équipe n'a jamais gagné ou le nom d'équipe que tu m'as donné n'existe pas")
+                else:
+                    print("Cette équipe à gagné son premier match le : "+date_prem_vic)
+        # Option 10
+        if rep == 10:
+            if liste_matchs == None:
+                print("Il faut charger un fichier avant !\n")
+            else:
+                nb_matchs_sans_defaites = histoire2foot.nb_matchs_sans_defaites(liste_matchs, input("De quelle équipe veux tu connaitre le nombre de matchs consécutifs sans défaite ? "))
+                if int(nb_matchs_sans_defaites) == 0:
+                    print("Cette équipe n'a jamais gagné ou le om d'équipe que tu m'as donné n'existe pas")
+                else:
+                    print("Cette équipe à deja gagné "+str(nb_matchs_sans_defaites)+" matchs consécutifs !")
+        # Option 11
+        if rep == 11:
+            if liste_matchs == None:
+                print("Il faut charger un fichier avant !\n")
+            else:
+                plus_de_victoires_que_defaites = histoire2foot.plus_de_victoires_que_defaites(liste_matchs, input("Pour quelle équipe veux tu savoir si elle a obtenu plus de victoire que de défaite ? "))
+                if plus_de_victoires_que_defaites:
+                    print("Oui, cette équipe a obtenu plus de victoire que de défaite")
+                else:
+                    print("Non, cette équipe n'a pas obtenu plus de victoire que de défaite")
+        # Option 12
+        if rep == 12:
+            if liste_matchs == None:
+                print("Il faut charger un fichier avant !\n")
+            else:
+                matchs_spectaculaires = histoire2foot.matchs_spectaculaires(liste_matchs)
+                if matchs_spectaculaires == []:
+                    print("Il y a aucun match dans le fichier que tu m'as donné")
+                else:
+                    print("Voici la liste des matchs les plus spectaculaires : "+str(matchs_spectaculaires))
+        # Option 13
+        if rep == 13:
+            if liste_matchs == None:
+                print("Il faut charger un fichier avant !\n")
+            else:
+                meilleures_equipes = histoire2foot.meilleures_equipes(liste_matchs)
+                if meilleures_equipes == []:
+                    print("Il y a aucun match dans le fichier que tu m'as donné")
+                else:
+                    print("Voici la liste des équipes qui ont le plus petit nombre de defaites : "+str(meilleures_equipes))
         # Option quitter
         elif rep == len(liste_options):
             break
@@ -198,4 +248,3 @@ def programme_principal():
 
 
 programme_principal()
-# print(histoire2foot.resultats_equipe(histoire2foot.charger_matchs("histoire1.csv"),"ff"))

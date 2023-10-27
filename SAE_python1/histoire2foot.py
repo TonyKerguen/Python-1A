@@ -409,7 +409,6 @@ def liste_des_equipes(liste_matchs):
             return None
     return res
 
-
 def premiere_victoire(liste_matchs, equipe):
     """retourne la date de la première victoire de l'equipe. Si l'equipe n'a jamais gagné de match on retourne None
 
@@ -579,3 +578,5 @@ def meilleures_equipes(liste_matchs):
         elif resultats_equipe(liste_matchs, equipe)[2] == min_def:
             res.append(equipe)
     return res
+
+print(liste_des_equipes(charger_matchs("histoire1.csv")))
