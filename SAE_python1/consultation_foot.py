@@ -55,8 +55,8 @@ def programme_principal():
                      "Afficher la liste des matchs les plus spectaculaires",  # 12
                      "la liste des équipes de la liste qui ont le plus petit nombre de defaites",  # 13
                      "Quitter"]  # 14
-    # liste_matchs = None
-    liste_matchs = histoire2foot.charger_matchs("histoire1.csv")
+    liste_matchs = None
+    # liste_matchs = histoire2foot.charger_matchs("histoire1.csv")
     while True:
         rep = menu("MENU DE MON APPLICATION", liste_options)
         if rep is None:
@@ -70,8 +70,7 @@ def programme_principal():
             non_réussi = True
             while non_réussi:
                 try:
-                    liste_matchs = histoire2foot.charger_matchs(
-                        "./"+input("Quel fichier charger ? \n"))
+                    liste_matchs = histoire2foot.charger_matchs(input("Quel fichier charger ? (histoire1.csv par exemple)\n"))
                     print(str(len(liste_matchs))+" matchs trouvées !")
                     non_réussi = False
                 except:

@@ -578,5 +578,3 @@ def meilleures_equipes(liste_matchs):
         elif resultats_equipe(liste_matchs, equipe)[2] == min_def:
             res.append(equipe)
     return res
-
-print(liste_des_equipes(charger_matchs("histoire1.csv")))
