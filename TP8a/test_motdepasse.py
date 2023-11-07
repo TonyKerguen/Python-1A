@@ -34,6 +34,7 @@ def test_sans_deux_chiffre_consecutif():
     assert not motdepasse.sans_deux_chiffre_consecutif("a11")
     assert motdepasse.sans_deux_chiffre_consecutif("1a1")
 
+
 def test_plus_petit_chiffre_apparait_une_seul_fois():
     assert not motdepasse.plus_petit_chiffre_apparait_une_seul_fois("aaa")
     assert not motdepasse.plus_petit_chiffre_apparait_une_seul_fois("1a2a3a1")

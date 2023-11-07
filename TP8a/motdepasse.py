@@ -118,7 +118,11 @@ def plus_petit_chiffre_apparait_une_seul_fois(chaine):
                 nb_apparition_plus_petit_nombre += 1
     return nb_apparition_plus_petit_nombre == 1
 
+def charger_mdr(nom_fichier = "./mdpUltraSecret.txt"):
+    fic = open(nom_fichier, 'r', encoding="utf-8")
+
+# def sauver_mdp():
 
 
 
-dialogue_mot_de_passe()
+# dialogue_mot_de_passe()
