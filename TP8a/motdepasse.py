@@ -6,6 +6,7 @@ def dialogue_mot_de_passe():
     Returns:
         str: le mot de passe
     """    
+    donnee = charger_mdp()
     login = input("Entrez votre nom : ")
     mot_de_passe_correct = False
     while not mot_de_passe_correct :
@@ -32,7 +33,9 @@ def dialogue_mot_de_passe():
         elif not plus_petit_chiffre_apparait_une_seul_fois_check:
             print("Votre mot de passe ne doit pas contenir le plus petit chiffre plusieurs fois") 
         else:
-            mot_de_passe_correct = True        
+            mot_de_passe_correct = True  
+    donnee[login] = mot_de_passe
+    sauver_mdp(donnee)      
     print("Votre mot de passe est correct")
     return mot_de_passe
 
@@ -118,11 +121,22 @@ def plus_petit_chiffre_apparait_une_seul_fois(chaine):
                 nb_apparition_plus_petit_nombre += 1
     return nb_apparition_plus_petit_nombre == 1
 
-def charger_mdr(nom_fichier = "./mdpUltraSecret.txt"):
+def charger_mdp(nom_fichier = "./mdpUltraSecret.txt"):
     fic = open(nom_fichier, 'r', encoding="utf-8")
+    fic.readline()
+    res = dict()
+    for ligne in fic:
+        donnee = ligne.split(",")
+        res[str(donnee[0])] = str(donnee[1][:-1])
+    fic.close()
+    return res
 
-# def sauver_mdp():
+def sauver_mdp(donnee, nom_fichier = "./mdpUltraSecret.txt"):
+    fic = open(nom_fichier, 'w', encoding="utf-8")
+    fic.write("nom_util,mdp_util\n")
+    for (nom_util, mdp_util) in donnee.items():
+        fic.write(nom_util+","+mdp_util+"\n")
+    fic.close()
 
 
-
-# dialogue_mot_de_passe()
+dialogue_mot_de_passe()
