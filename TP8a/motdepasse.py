@@ -1,4 +1,6 @@
 # Codé par Papy Force X, jeune padawan de l'informatique
+import string
+from tkinter import *
 
 def dialogue_mot_de_passe():
     """indique si son mot de passe est correct
@@ -122,6 +124,14 @@ def plus_petit_chiffre_apparait_une_seul_fois(chaine):
     return nb_apparition_plus_petit_nombre == 1
 
 def charger_mdp(nom_fichier = "./mdpUltraSecret.txt"):
+    """retourne le dictionnaire login:mdp contenu dans le fichier nom_fichier
+
+    Args:
+        nom_fichier (str, optional): le chemin du fichier. Defaults to "./mdpUltraSecret.txt".
+
+    Returns:
+        dict: le dictionnaire login:mdp contenu dans le fichier nom_fichier
+    """    
     fic = open(nom_fichier, 'r', encoding="utf-8")
     fic.readline()
     res = dict()
@@ -132,6 +142,12 @@ def charger_mdp(nom_fichier = "./mdpUltraSecret.txt"):
     return res
 
 def sauver_mdp(donnee, nom_fichier = "./mdpUltraSecret.txt"):
+    """sauvegarde le dictionnaire donnee dans le fichier nom_fichier
+
+    Args:
+        donnee (dict): un dictionnaire login:mdp
+        nom_fichier (str, optional): le chemin du fichier. Defaults to "./mdpUltraSecret.txt".
+    """    
     fic = open(nom_fichier, 'w', encoding="utf-8")
     fic.write("nom_util,mdp_util\n")
     for (nom_util, mdp_util) in donnee.items():
@@ -139,4 +155,67 @@ def sauver_mdp(donnee, nom_fichier = "./mdpUltraSecret.txt"):
     fic.close()
 
 
-dialogue_mot_de_passe()
+# dialogue_mot_de_passe()
+
+
+
+
+############################################################################
+
+# def dialogue_mot_de_passe(nom, mot_de_passe):
+#     """indique si son mot de passe est correct
+
+#     Returns:
+#         str: le mot de passe
+#     """    
+#     donnee = charger_mdp()
+#     mot_de_passe_correct = False
+#     while not mot_de_passe_correct :
+#         # je vérifie la longueur
+#         longueur_ok_check = longueur_ok(mot_de_passe)
+#         # je vérifie s'il y a un chiffre
+#         chiffre_ok_check = chiffre_ok(mot_de_passe)
+#         # je vérifie qu'il n'y a pas d'espace
+#         sans_espace_check = sans_espace(mot_de_passe)
+#         # je vérifie qu'il n'y a pas 2 chiffre consecutif
+#         sans_deux_chiffre_consecutif_check = sans_deux_chiffre_consecutif(mot_de_passe)
+#         # je vérifie que le plus petit chiffre apparait une seul fois
+#         plus_petit_chiffre_apparait_une_seul_fois_check = plus_petit_chiffre_apparait_une_seul_fois(mot_de_passe)
+#         # Je gère l'affichage
+#         if not longueur_ok_check:
+#             print("Votre mot de passe doit comporter au moins 8 caractères")
+#         elif not chiffre_ok_check:
+#             print("Votre mot de passe doit comporter au moins 3 chiffres")
+#         elif not sans_espace_check:
+#             print("Votre mot de passe ne doit pas comporter d'espace")
+#         elif not sans_deux_chiffre_consecutif_check:
+#             print("Votre mot de passe ne doit pas contenir 2 chiffre consecutif")
+#         elif not plus_petit_chiffre_apparait_une_seul_fois_check:
+#             print("Votre mot de passe ne doit pas contenir le plus petit chiffre plusieurs fois") 
+#         else:
+#             mot_de_passe_correct = True  
+#     donnee[nom] = mot_de_passe
+#     sauver_mdp(donnee)      
+#     print("Votre mot de passe est correct")
+#     return mot_de_passe
+
+
+# fenetre = Tk()
+
+# labelnom = Label(fenetre, text="Nom :")
+# entreenom = Entry(fenetre, textvariable=string, width=30)
+
+# labelmdp = Label(fenetre, text="Nom :")
+# entreemdp = Entry(fenetre, textvariable=string, width=30)
+
+# bouton=Button(fenetre, text="Valider", command=dialogue_mot_de_passe(labelnom, labelmdp))
+
+# value = StringVar() 
+# value.set("texte par défaut")
+
+# labelnom.pack()
+# labelmdp.pack()
+# bouton.pack()
+
+
+# fenetre.mainloop()
