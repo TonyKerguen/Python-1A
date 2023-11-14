@@ -182,4 +182,13 @@ def famille_la_plus_representee_v2(pokedex):
     Returns:
         str: le nom de la famille la plus représentée dans le pokedex
     """
-    ...
+    res = None
+    nb_max = 0
+    familles = toutes_les_familles_v2(pokedex)
+    for famille in familles:
+        nb_poke_famille = nombre_pokemons_v2(pokedex, famille)
+        if res is None or nb_poke_famille > nb_max:
+            res = famille
+            nb_max = nb_poke_famille
+    return res
+
