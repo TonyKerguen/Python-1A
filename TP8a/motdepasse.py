@@ -155,7 +155,7 @@ def sauver_mdp(donnee, nom_fichier = "./mdpUltraSecret.txt"):
     fic.close()
 
 
-# dialogue_mot_de_passe()
+dialogue_mot_de_passe()
 
 
 
