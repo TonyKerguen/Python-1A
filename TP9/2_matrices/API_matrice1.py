@@ -56,9 +56,9 @@ def set_val(matrice, ligne, colonne, nouvelle_valeur):
     matrice[2][ligne*get_nb_colonnes(matrice)+colonne] = nouvelle_valeur
 
 test = matrice(2, 3, 5)
-print(test)
+# print(test)
 set_val(test, 1, 2, 8)
-print(test)
+# print(test)
 
 
 def get_val(matrice, ligne, colonne):
@@ -101,7 +101,7 @@ def affiche(matrice, taille_cellule=4):
     """
     nb_colonnes = get_nb_colonnes(matrice)
     nb_lignes = get_nb_lignes(matrice)
-    print(' '*taille_cellule+'|', end='')
+    print('\n'+' '*taille_cellule+'|', end='')
     for i in range(nb_colonnes):
         print(str(i).center(taille_cellule) + '|', end='')
     affiche_ligne_separatrice(matrice, taille_cellule)
@@ -112,6 +112,7 @@ def affiche(matrice, taille_cellule=4):
         affiche_ligne_separatrice(matrice, taille_cellule)
     print()
 
+affiche(test)
 
 # Ajouter ici les fonctions supplémentaires, sans oublier de compléter le fichier
 # tests_API_matrice.py avec des fonctions de tests
