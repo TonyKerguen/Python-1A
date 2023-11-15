@@ -12,8 +12,32 @@ def matrice(nb_lignes, nb_colonnes, valeur_par_defaut):
     Returns:
         une nouvelle matrice qui contient la valeur par défaut dans chacune de ses cases
     """
-    ...
 
+    return (nb_lignes, nb_colonnes, [valeur_par_defaut]*(nb_lignes*nb_colonnes))
+
+
+def get_nb_lignes(matrice):
+    """permet de connaître le nombre de lignes d'une matrice
+
+    Args:
+        matrice : une matrice
+
+    Returns:
+        int : le nombre de lignes de la matrice
+    """
+    return matrice[0]
+
+
+def get_nb_colonnes(matrice):
+    """permet de connaître le nombre de colonnes d'une matrice
+
+    Args:
+        matrice : une matrice
+
+    Returns:
+        int : le nombre de colonnes de la matrice
+    """
+    return matrice[1]
 
 
 def set_val(matrice, ligne, colonne, nouvelle_valeur):
@@ -29,31 +53,12 @@ def set_val(matrice, ligne, colonne, nouvelle_valeur):
     Returns:
         None
     """
-    ...
+    matrice[2][ligne*get_nb_colonnes(matrice)+colonne] = nouvelle_valeur
 
-
-def get_nb_lignes(matrice):
-    """permet de connaître le nombre de lignes d'une matrice
-
-    Args:
-        matrice : une matrice
-
-    Returns:
-        int : le nombre de lignes de la matrice
-    """
-    ...
-
-
-def get_nb_colonnes(matrice):
-    """permet de connaître le nombre de colonnes d'une matrice
-
-    Args:
-        matrice : une matrice
-
-    Returns:
-        int : le nombre de colonnes de la matrice
-    """
-    ...
+test = matrice(2, 3, 5)
+print(test)
+set_val(test, 1, 2, 8)
+print(test)
 
 
 def get_val(matrice, ligne, colonne):

@@ -203,17 +203,25 @@ def sauver_mdp(donnee, nom_fichier = "./mdpUltraSecret.txt"):
 fenetre = Tk()
 
 labelnom = Label(fenetre, text="Nom :")
-entreenom = Entry(fenetre, textvariable=string, width=30)
-
-labelmdp = Label(fenetre, text="Nom :")
-entreemdp = Entry(fenetre, textvariable=string, width=30)
-
-
-value = StringVar() 
-value.set("texte par défaut")
-
+entreenom = Entry(fenetre, textvariabl=string, width=30)
 labelnom.pack()
+entreenom.pack()
+
+labelmdp = Label(fenetre, text="MDP :")
+entreemdp = Entry(fenetre, textvariable=string, width=30)
 labelmdp.pack()
+entreemdp.pack()
+
+bouton=Button(fenetre, text="Valider", command=quit)
+bouton.pack()
+# value = StringVar() 
+# value.set("texte par défaut")
+
+
+
+
+
+
 
 
 fenetre.mainloop()
