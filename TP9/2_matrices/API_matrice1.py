@@ -73,7 +73,8 @@ def get_val(matrice, ligne, colonne):
     Returns:
         la valeur qui est dans la case située à la ligne et la colonne spécifiées
     """
-    ...
+    return matrice[2][ligne*get_nb_colonnes(matrice)+colonne]
+
 
 # Fonctions pour l'affichage 
 
