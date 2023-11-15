@@ -1,7 +1,7 @@
 """ Matrices : API n 1 """
 
 
-def matrice(nb_lignes, nb_colonnes, valeur_par_defaut):
+def construit_matrice(nb_lignes, nb_colonnes, valeur_par_defaut):
     """crée une nouvelle matrice en mettant la valeur par défaut dans chacune de ses cases.
 
     Args:
@@ -55,7 +55,7 @@ def set_val(matrice, ligne, colonne, nouvelle_valeur):
     """
     matrice[2][ligne*get_nb_colonnes(matrice)+colonne] = nouvelle_valeur
 
-test = matrice(2, 3, 5)
+test = construit_matrice(2, 3, 5)
 # print(test)
 set_val(test, 1, 2, 8)
 # print(test)
@@ -112,8 +112,6 @@ def affiche(matrice, taille_cellule=4):
         affiche_ligne_separatrice(matrice, taille_cellule)
     print()
 
-affiche(test)
-
 # Ajouter ici les fonctions supplémentaires, sans oublier de compléter le fichier
 # tests_API_matrice.py avec des fonctions de tests
 
@@ -126,7 +124,12 @@ def charge_matrice_str(nom_fichier):
     Returns:
         une matrice de str
     """
-    ...
+    fic = open(nom_fichier, 'r', encoding="utf-8")
+    res = []
+    for lignefic in fic:
+        res.append(lignefic.split(",")[:-1])
+    fic.close()
+    return res
 
 
 def sauve_matrice(matrice, nom_fichier):
