@@ -155,12 +155,12 @@ def sauver_mdp(donnee, nom_fichier = "./mdpUltraSecret.txt"):
     fic.close()
 
 
-dialogue_mot_de_passe()
+# dialogue_mot_de_passe()
 
 
 
 
-############################################################################
+###########################################################################
 
 # def dialogue_mot_de_passe(nom, mot_de_passe):
 #     """indique si son mot de passe est correct
@@ -200,22 +200,20 @@ dialogue_mot_de_passe()
 #     return mot_de_passe
 
 
-# fenetre = Tk()
+fenetre = Tk()
 
-# labelnom = Label(fenetre, text="Nom :")
-# entreenom = Entry(fenetre, textvariable=string, width=30)
+labelnom = Label(fenetre, text="Nom :")
+entreenom = Entry(fenetre, textvariable=string, width=30)
 
-# labelmdp = Label(fenetre, text="Nom :")
-# entreemdp = Entry(fenetre, textvariable=string, width=30)
-
-# bouton=Button(fenetre, text="Valider", command=dialogue_mot_de_passe(labelnom, labelmdp))
-
-# value = StringVar() 
-# value.set("texte par défaut")
-
-# labelnom.pack()
-# labelmdp.pack()
-# bouton.pack()
+labelmdp = Label(fenetre, text="Nom :")
+entreemdp = Entry(fenetre, textvariable=string, width=30)
 
 
-# fenetre.mainloop()
+value = StringVar() 
+value.set("texte par défaut")
+
+labelnom.pack()
+labelmdp.pack()
+
+
+fenetre.mainloop()
