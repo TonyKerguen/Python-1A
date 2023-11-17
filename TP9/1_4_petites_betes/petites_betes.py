@@ -49,7 +49,10 @@ def frequences_famille(pokedex):
     """
     res = dict()
     for (_, type) in pokedex:
-        res[type] = nombre_pokemons(pokedex, type)
+        if type in res.keys():
+            res[type] += 1
+        else:
+            res[type] = 1
     return res
 
 def dico_par_famille(pokedex):
@@ -66,13 +69,12 @@ def dico_par_famille(pokedex):
         l'ensemble (set) des noms des pokemons de cette famille dans le pokedex
     """
     res = dict()
-    familles = toutes_les_familles(pokedex)
-    for famille in familles:
-        noms_pokes = set()
-        for (nom, type) in pokedex:
-            if type == famille:
-                noms_pokes.add(nom)
-        res[famille] = noms_pokes
+    for nom,familles in pokedex:
+        if familles in res.keys():
+            res[familles].add(nom)
+        else:
+            res[familles] = set()
+            res[familles] = nom
     return res
 
 def famille_la_plus_representee(pokedex):
@@ -144,9 +146,12 @@ def frequences_famille_v2(pokedex):
         associée est le nombre de représentants de la famille (int)
     """
     res = dict()
-    familles = toutes_les_familles_v2(pokedex)
-    for famille in familles:
-        res[famille] = nombre_pokemons_v2(pokedex, famille)
+    for (_, types) in pokedex.items():
+        for type in types:
+            if type in res.keys():
+                res[type] += 1
+            else:
+                res[type] = 1
     return res
 
 def dico_par_famille_v2(pokedex):

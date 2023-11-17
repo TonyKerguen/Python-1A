@@ -19,8 +19,11 @@ def matrice1():
     API.set_val(m1, 2, 3, 21)
     return m1
 
+print(matrice1())
+
 def matrice2():
     m2 = API.construit_matrice(2, 3, None)
+    print(m2)
     API.set_val(m2, 0, 0, 'A')
     API.set_val(m2, 0, 1, 'B')    
     API.set_val(m2, 0, 2, 'C')
@@ -28,6 +31,8 @@ def matrice2():
     API.set_val(m2, 1, 1, 'E')
     API.set_val(m2, 1, 2, 'F')
     return m2
+
+print(matrice2())
 
 def matrice3():
     m3 = API.construit_matrice(3, 3, None)

@@ -115,7 +115,7 @@ def affiche(matrice, taille_cellule=4):
 # Ajouter ici les fonctions supplémentaires, sans oublier de compléter le fichier
 # tests_API_matrice.py avec des fonctions de tests
 
-def charge_matrice_str(nom_fichier):
+def charge_matrice_str(nom_fichier = "./matricetest.csv"):
     """permet créer une matrice de str à partir d'un fichier CSV.
 
     Args:
@@ -125,14 +125,20 @@ def charge_matrice_str(nom_fichier):
         une matrice de str
     """
     fic = open(nom_fichier, 'r', encoding="utf-8")
-    res = []
+    val = []
+    nbligne = 0
     for lignefic in fic:
-        res.append(lignefic.split(",")[:-1])
+        nbligne += 1
+        for elem in lignefic.split(","):
+            if elem != "\n":
+                val.append(elem)
     fic.close()
+    res = (nbligne, len(lignefic.split(","))-1, val)
     return res
 
+# print(charge_matrice_str())
 
-def sauve_matrice(matrice, nom_fichier):
+def sauve_matrice(matrice, nom_fichier = "./matrice.csv"):
     """permet sauvegarder une matrice dans un fichier CSV.
     Attention, avec cette fonction, on perd l'information sur le type des éléments
 
@@ -143,4 +149,13 @@ def sauve_matrice(matrice, nom_fichier):
     Returns:
         None
     """
-    ...
+    fic = open(nom_fichier, 'w', encoding="utf-8")
+    for elem in range(len(matrice[2])):
+        if elem % matrice[1] == 0 and elem != 0:
+            fic.write("\n"+str(matrice[2][elem])+",")
+        else:
+            fic.write(str(matrice[2][elem])+",")
+    fic.write("\n")
+    fic.close()
+
+# sauve_matrice((3, 4, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]),"./matricetest.csv")
