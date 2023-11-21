@@ -69,13 +69,13 @@ def dico_par_famille(pokedex):
         l'ensemble (set) des noms des pokemons de cette famille dans le pokedex
     """
     res = dict()
-    for nom,familles in pokedex:
-        if familles in res.keys():
-            res[familles].add(nom)
+    for nom, famille in pokedex:
+        if famille in res.keys():
+            res[famille].add(nom)
         else:
-            res[familles] = set()
-            res[familles] = nom
+            res[famille] = {nom}
     return res
+
 
 def famille_la_plus_representee(pokedex):
     """détermine le nom de la famille la plus représentée dans le pokedex
@@ -168,13 +168,12 @@ def dico_par_famille_v2(pokedex):
         l'ensemble (set) des noms des pokemons de cette famille dans le pokedex
     """
     res = dict()
-    familles = toutes_les_familles_v2(pokedex)
-    for famille in familles:
-        noms_pokes = set()
-        for (nom, type) in pokedex.items():
-            if famille in type:
-                noms_pokes.add(nom)
-        res[famille] = noms_pokes
+    for (nom,famille) in pokedex.items():
+        for type in famille:
+            if type in res.keys():
+                res[type].add(nom)
+            else:
+                res[type] = {nom}
     return res
 
 def famille_la_plus_representee_v2(pokedex):
