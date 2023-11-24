@@ -15,6 +15,7 @@ def en_voie_disparition(ecosysteme, animal):
     """
     renvoie True si animal s'éteint est voué à disparaitre à long terme
     """
+    ...
 
 def animaux_en_danger(ecosysteme):
     """ renvoie l'ensemble des animaux qui sont en danger d'extinction immédiate"""
