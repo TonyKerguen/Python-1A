@@ -7,6 +7,7 @@ def test_extinction_immediate():
     ecosysteme_2 = { 'Renard':'Poule', 'Poule':'Ver de terre', 'Ver de terre':'Renard', 'Ours':'Renard' }
     assert ecosysteme.extinction_immediate(ecosysteme_1, 'Lapin')
     assert ecosysteme.extinction_immediate(ecosysteme_1, 'Requin')
+    assert not ecosysteme.extinction_immediate(ecosysteme_1, 'Herbe')
     assert not ecosysteme.extinction_immediate(ecosysteme_1, 'Mouton')
     assert not ecosysteme.extinction_immediate(ecosysteme_1, 'Dragon')
     assert not ecosysteme.extinction_immediate(ecosysteme_2, 'Poule')

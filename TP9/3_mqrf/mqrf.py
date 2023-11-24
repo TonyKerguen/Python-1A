@@ -52,7 +52,6 @@ def quel_guichet_v3(mqrf, guichet):
         cette fonction renvoie None
     """
     nb_guichet = 1
-    print(len(mqrf))
     while mqrf[guichet] != None and nb_guichet <= len(mqrf):
         if nb_guichet == len(mqrf):
             return None
