@@ -159,3 +159,44 @@ def sauve_matrice(matrice, nom_fichier = "./matrice.csv"):
     fic.close()
 
 # sauve_matrice((3, 4, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]),"./matricetest.csv")
+# 10 11 12 13
+# 14 15 16 17
+# 18 19 20 21
+
+def get_ligne(matrice, ligne):
+    return matrice[2][matrice[1]*ligne:(matrice[1]*ligne)+matrice[1]]
+
+def get_colonne(matrice, colonne):
+    res = []
+    i = colonne
+    while i < len(matrice[2]):
+        res.append(matrice[2][i])
+        i += matrice[1]
+    return res
+
+def get_diagonale_principale(matrice):
+    res = []
+    if matrice[0] == matrice[1]:
+        for elem in range(0,matrice[0]):
+            res.append(get_val(matrice, elem, elem))
+        return res
+    else:
+        return None
+    
+def get_diagonale_secondaire(matrice):
+    res = []
+    if matrice[0] == matrice[1]:
+        for elem in range(0,matrice[0]):
+            res.append(get_val(matrice, elem, matrice[1]-elem-1))
+        return res
+    else:
+        return None
+    
+def transpose(matrice):
+    res = (matrice[1], matrice[0], [])
+    for colonne in range(0, matrice[1]):
+        for elem in get_colonne(matrice, colonne):
+            res[2].append(elem)
+    return res
+
+def
