@@ -199,4 +199,12 @@ def transpose(matrice):
             res[2].append(elem)
     return res
 
-def
+def bloc(matrice, ligne, colonne, hauteur, largeur):
+    if ligne + hauteur > matrice[0] or colonne + largeur > matrice[1]:
+        return None
+    else:
+        for c in range(ligne, ligne+hauteur):
+            for elem in 
+
+
+        
