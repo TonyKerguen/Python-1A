@@ -194,3 +194,12 @@ def v2_to_v3(pokedex_v2):
                 res[type] = {nom}
     return res
 
+def pokemons_par_famille(liste_pokemon):
+    res = dict()
+    for (nom, types, _) in liste_pokemon:
+        for type in types:
+            if type in res.keys():
+                res[type].add(nom)
+            else:
+                res[type] = {nom}
+    return res

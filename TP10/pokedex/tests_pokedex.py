@@ -137,3 +137,11 @@ def test_v2_to_v3():
     (pokedex_anakin_v2, pokedex_romain_v2) = exemples_pokedex_v2()    
     assert pokedex.v2_to_v3(pokedex_anakin_v2) == pokedex_anakin_v3
     assert pokedex.v2_to_v3(pokedex_romain_v2) == pokedex_romain_v3
+
+def test_pokemons_par_famille():
+    ma_liste_pokemon =[( 'Bulbizarre', {'Plante', 'Poison'}, '001.png'),
+                        ( 'Herbizarre', {'Plante', 'Poison'}, '002.png'),
+                        ( 'Abo', {'Poison'}, '023.png'),
+                        ( 'Jungko', {'Plante'}, '254.png')]
+    assert pokedex.pokemons_par_famille(ma_liste_pokemon) == {'Plante' :{'Bulbizarre', 'Herbizarre' ,'Jungko'},
+                                                              'Poison' :{'Bulbizarre', 'Herbizarre', 'Abo'}}
