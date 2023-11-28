@@ -103,3 +103,13 @@ def test_get_diagonale_secondaire():
 def test_transposee():
     m3 = matrice3()
     assert API.transpose(m3) == (3, 3, [2,9,4,7,5,3,6,1,8])
+
+def test_is_triangulaire_inf():
+    m3 = matrice3()
+    assert not API.is_triangulaire_inf(m3)
+    assert API.is_triangulaire_inf((3, 3, [1, 0, 0, 2, 2, 0, 3, 3, 3]))
+
+def test_bloc():
+    m3 = matrice3()
+    assert API.bloc(m3, 0, 0, 2, 2) == (2, 2, [2, 7, 9, 5])
+    assert API.bloc(m3, 1, 1, 2, 2) == (2, 2, [5, 1, 3, 8])

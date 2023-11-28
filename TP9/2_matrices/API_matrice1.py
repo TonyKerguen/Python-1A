@@ -199,12 +199,21 @@ def transpose(matrice):
             res[2].append(elem)
     return res
 
+def is_triangulaire_inf(matrice):
+    i = 1
+    for l in range(0, matrice[0]):
+        for elem in get_ligne(matrice, l)[i:]:
+            i += 1
+            if elem != 0:
+                return False
+    return True
+
 def bloc(matrice, ligne, colonne, hauteur, largeur):
+    res = (hauteur, largeur, [])
     if ligne + hauteur > matrice[0] or colonne + largeur > matrice[1]:
         return None
     else:
-        for c in range(ligne, ligne+hauteur):
-            for elem in 
-
-
-        
+        for l in range(ligne, ligne+hauteur):
+            for elem in get_ligne(matrice, l)[colonne:colonne+largeur]:
+                res[2].append(elem)
+    return res
