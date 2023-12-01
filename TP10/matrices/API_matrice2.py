@@ -111,3 +111,60 @@ def transpose(matrice):
     for i in range(0, len(matrice[0])):
         res.append(get_colonne(matrice, i))
     return res
+
+def is_triangulaire_inf(matrice):
+    i = 1
+    for l in range(0, len(matrice)):
+        for elem in get_ligne(matrice, l)[i:]:
+            i += 1
+            if elem != 0:
+                return False
+    return True
+
+def is_triangulaire_sup(matrice):
+    i = 1
+    for l in range(1, len(matrice)):
+        for elem in get_ligne(matrice, l)[:i]:
+            i += 1
+            if elem != 0:
+                return False
+    return True
+
+def bloc(matrice, ligne, colonne, hauteur, largeur):
+    res = []
+    if ligne + hauteur > len(matrice) or colonne + largeur > len(matrice[0]):
+        return None
+    else:
+        for l in range(ligne, ligne + hauteur):
+            res.append(get_ligne(matrice, l)[colonne:colonne+largeur])
+        return res
+    
+def somme(matrice1, matrice2):
+    if len(matrice1) == len(matrice2) and len(matrice1[0]) == len(matrice2[0]):
+        res = construit_matrice(get_nb_lignes(matrice1), get_nb_colonnes(matrice2))
+        for ligne in range(0, len(res)):
+            for colonne in range(0, len(res[0])):
+                set_val(res, ligne, colonne, get_val(matrice1, ligne, colonne)+get_val(matrice2, ligne, colonne))
+        return res
+    else:
+        return None
+
+def somme_des_elem_2_listes(liste1, liste2):
+    res = 0
+    i = 0
+    while i < len(liste1):
+        res += liste1[i]*liste2[i]
+        i += 1
+    return res
+
+
+
+def produit(matrice1, matrice2):
+    if len(matrice1[0]) == len(matrice2):
+        res = construit_matrice(get_nb_lignes(matrice1), get_nb_colonnes(matrice2))
+        for ligne in range(0, len(res)):
+            for colonne in range(0, len(res[0])):
+                set_val(res, ligne, colonne, somme_des_elem_2_listes(get_ligne(matrice1, ligne), get_colonne(matrice2, colonne)))
+        return res
+    else:
+        return None

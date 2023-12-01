@@ -95,3 +95,36 @@ def test_transposee():
     m2 = matrice2()
     assert API.transpose(m3) == ([[2,9,4],[7,5,3],[6,1,8]])
     assert API.transpose(m2) == ([['A','D'],['B','E'],['C','F']])
+
+def test_is_triangulaire_inf():
+    m3 = matrice3()
+    m2 = matrice2()
+    assert not API.is_triangulaire_inf(m2)
+    assert not API.is_triangulaire_inf(m3)
+    assert API.is_triangulaire_inf([[1, 0, 0], [2, 2, 0], [3, 3, 3]])
+
+def test_is_triangulaire_sup():
+    m3 = matrice3()
+    m2 = matrice2()
+    assert not API.is_triangulaire_sup(m2)
+    assert not API.is_triangulaire_sup(m3)
+    assert API.is_triangulaire_sup([[1, 1, 1], [0, 2, 2], [0, 0, 3]])
+
+def test_bloc():
+    m3 = matrice3()
+    assert API.bloc(m3, 0, 0, 2, 2) == [[2, 7], [9, 5]]
+    assert API.bloc(m3, 1, 1, 2, 2) == [[5, 1], [3, 8]]
+    assert API.bloc(m3, 1, 1, 5, 5) is None
+
+def test_somme():
+    assert API.somme([[0, 1, 2], [3, 4, 5], [6, 7, 8]], [[9, 10, 11], [12, 13, 14], [15, 16, 17]]) == [[9, 11, 13], [15, 17, 19], [21, 23, 25]]
+    assert API.somme([[1, 2, 3]], [[1, 2]]) is None
+    assert API.somme([[1, 2, 3]], [[4, 5, 6]]) == [[5, 7, 9]]
+
+def test_somme_des_elem_2_listes():
+    assert API.somme_des_elem_2_listes([1, 2], [3, 4]) == 11
+    assert API.somme_des_elem_2_listes([1, 2], [3, -4]) == -5
+
+def test_produit():
+    assert API.produit([[1, 2, 3], [4, 5, 6]], [[7, 8], [9, -1], [-2, -3]]) == [[19, -3], [61, 9]]
+    assert API.produit([[1, 2], [3, 4], [5, 6], [7, 8]], [[1, 2, 3], [4, 5, 6]]) == [[9, 12, 15], [19, 26, 33], [29, 40, 51], [39, 54, 69]]

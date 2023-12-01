@@ -41,7 +41,7 @@ def bloc(matrice, ligne, colonne, hauteur, largeur):
     if ligne + hauteur > matrice[0] or colonne + largeur > matrice[1]:
         return None
     else:
-        for l in range(ligne, ligne+hauteur):
+        for l in range(ligne, ligne + hauteur):
             for elem in matricee.get_ligne(matrice, l)[colonne:colonne+largeur]:
                 res[2].append(elem)
-    return res
+        return res

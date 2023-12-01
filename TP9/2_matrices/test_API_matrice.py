@@ -2,6 +2,7 @@
     Remarques : tous les tests de ce fichier doivent passer quelle que soit l'API utilisée
     """
 import API_matrice1 as API
+import utilitaires_matrice as APIut
 
 def matrice1():
     m1 = API.construit_matrice(3, 4, None)
@@ -94,22 +95,22 @@ def test_get_colonne():
 
 def test_get_diagonale_principale():
     m3 = matrice3()
-    assert API.get_diagonale_principale(m3) == [2,5,8]
+    assert APIut.get_diagonale_principale(m3) == [2,5,8]
 
 def test_get_diagonale_secondaire():
     m3 = matrice3()
-    assert API.get_diagonale_secondaire(m3) == [6,5,4]
+    assert APIut.get_diagonale_secondaire(m3) == [6,5,4]
 
 def test_transposee():
     m3 = matrice3()
-    assert API.transpose(m3) == (3, 3, [2,9,4,7,5,3,6,1,8])
+    assert APIut.transpose(m3) == (3, 3, [2,9,4,7,5,3,6,1,8])
 
 def test_is_triangulaire_inf():
     m3 = matrice3()
-    assert not API.is_triangulaire_inf(m3)
-    assert API.is_triangulaire_inf((3, 3, [1, 0, 0, 2, 2, 0, 3, 3, 3]))
+    assert not APIut.is_triangulaire_inf(m3)
+    assert APIut.is_triangulaire_inf((3, 3, [1, 0, 0, 2, 2, 0, 3, 3, 3]))
 
 def test_bloc():
     m3 = matrice3()
-    assert API.bloc(m3, 0, 0, 2, 2) == (2, 2, [2, 7, 9, 5])
-    assert API.bloc(m3, 1, 1, 2, 2) == (2, 2, [5, 1, 3, 8])
+    assert APIut.bloc(m3, 0, 0, 2, 2) == (2, 2, [2, 7, 9, 5])
+    assert APIut.bloc(m3, 1, 1, 2, 2) == (2, 2, [5, 1, 3, 8])
