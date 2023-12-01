@@ -11,7 +11,7 @@ def extinction_immediate(ecosysteme, animal):
     if ecosysteme[animal] is None:
         return False
     else:
-        return ecosysteme[animal] not in ecosysteme.keys() and ecosysteme[animal] != None
+        return ecosysteme[animal] not in ecosysteme.keys()
 
 
 def en_voie_disparition(ecosysteme, animal):
