@@ -81,3 +81,17 @@ def test_get_colonne():
     m3 = matrice3()
     assert API.get_colonne(m1,1) == [11, 15, 19]
     assert API.get_colonne(m3,2) == [6, 1, 8]
+
+def test_get_diagonale_principale():
+    m3 = matrice3()
+    assert API.get_diagonale_principale(m3) == [2,5,8]
+
+def test_get_diagonale_secondaire():
+    m3 = matrice3()
+    assert API.get_diagonale_secondaire(m3) == [6,5,4]
+
+def test_transposee():
+    m3 = matrice3()
+    m2 = matrice2()
+    assert API.transpose(m3) == ([[2,9,4],[7,5,3],[6,1,8]])
+    assert API.transpose(m2) == ([['A','D'],['B','E'],['C','F']])

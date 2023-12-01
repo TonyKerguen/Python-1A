@@ -83,3 +83,31 @@ def get_colonne(matrice, colonne):
     for ligne in matrice:
         res.append(ligne[colonne])
     return res
+
+def get_diagonale_principale(matrice):
+    if len(matrice) == len(matrice[0]):
+        res = []
+        i = 0
+        while i < len(matrice):
+            res.append(matrice[i][i])
+            i += 1
+        return res
+    else:
+        return None
+    
+def get_diagonale_secondaire(matrice):
+    if len(matrice) == len(matrice[0]):
+        res = []
+        i = 0
+        while i < len(matrice):
+            res.append(matrice[i][len(matrice)-i-1])
+            i += 1
+        return res
+    else:
+        return None
+    
+def transpose(matrice):
+    res = []
+    for i in range(0, len(matrice[0])):
+        res.append(get_colonne(matrice, i))
+    return res
