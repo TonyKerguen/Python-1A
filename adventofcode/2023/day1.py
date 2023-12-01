@@ -1,6 +1,3 @@
-
-
-
 chiffre_en_lettre = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 
 def remplace_lettre_en_chiffre(chaine:str):
