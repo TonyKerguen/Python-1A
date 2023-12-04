@@ -244,7 +244,7 @@ def rechercheautouretoile(lignehaut:str, lignemilieu:str, lignebas:str, numligne
             # ..X #
             if lignebas[carac] == "." and lignebas[carac+1].isnumeric():
                 i = 0
-                while carac+i < len(lignebas) and lignebas[carac+1+i].isnumeric():
+                while carac+1+i < len(lignebas) and lignebas[carac+1+i].isnumeric():
                     nombre = nombre + lignebas[carac+1+i]
                     i += 1
                 if nombre != "":
