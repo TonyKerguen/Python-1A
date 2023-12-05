@@ -1,11 +1,11 @@
-def get_bon_numero(tirage):
+def get_bon_numero(tirage:str):
     res = []
     for num in tirage.split(":")[1].split("|")[0].split(" "):
         if num != "" and num not in res:
             res.append(num)
     return res
 
-def get_liste_mes_numeros(tirage):
+def get_liste_mes_numeros(tirage:str):
     mes_num = tirage.split(":")[1].split("|")[1]
     numero = mes_num.split(" ")
     res = []
@@ -32,9 +32,27 @@ def Scratchcards(fichier = "./input.txt"):
     fic = open(fichier, 'r', encoding="utf-8")
     res = 0
     for ligne in fic:
+        print(get_nombre_numero_correct(ligne))
         res += calcul_nb_point(ligne[:-1])
     return res
 
-# print(Scratchcards())
+print(Scratchcards("./test.txt"))
 
 #################################################################################################
+
+def get_numero_tirage(tirage:str):
+    res = ""
+    for carac in tirage.split(":")[0]:
+        if carac.isnumeric():
+            res += carac
+    return res
+
+def creation_dico(fichier):
+    dico = dict()
+    with open(fichier, 'r', encoding="utf-8") as fic:
+        for ligne in fic:
+            dico[int(get_numero_tirage(ligne))] = 1
+    for tirage in dico
+    print(dico)
+
+# creation_dico("./input.txt")
