@@ -80,8 +80,9 @@ def get_ligne(matrice, ligne):
 
 def get_colonne(matrice, colonne):
     res = []
-    for ligne in matrice:
-        res.append(ligne[colonne])
+    {res.append(ligne[colonne]) for ligne in matrice}
+    # for ligne in matrice:
+    #     res.append(ligne[colonne])
     return res
 
 def get_diagonale_principale(matrice):
