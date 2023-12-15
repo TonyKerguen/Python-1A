@@ -31,7 +31,7 @@ def get_nb_lignes(matrice):
     Returns:
         int: le nombre de lignes de la matrice
     """
-    ...
+    return api.get_nombre_de_lignes(matrice)
 
 def get_nb_colonnes(matrice):
     """renvoie le nombre de colonnes de la matrice
@@ -43,7 +43,7 @@ def get_nb_colonnes(matrice):
     Returns:
         int: le nombre de colonnes de la matrice
     """
-    ...
+    return api.get_nombre_de_colonnes(matrice)
 
 def get_val(matrice, ligne, colonne):
     """renvoie une valeur de la matrice
@@ -57,7 +57,7 @@ def get_val(matrice, ligne, colonne):
         variable: le contenu de la case de la matrice qui se trouve à la ligne
         numéro ligne et à la colonne numéro colonne
     """
-    ...
+    return api.get_valeur(matrice, ligne, colonne)
 
 def set_val(matrice, ligne, colonne, new_val):
     """modifie le contenu de la case de la matrice qui se trouve à la ligne
@@ -71,7 +71,7 @@ def set_val(matrice, ligne, colonne, new_val):
     Returns:
         None
     """
-    ...
+    api.set_valeur(matrice, ligne, colonne, new_val)
 
 def affiche(matrice):
     """Affiche la matrice sur la sortie standard
