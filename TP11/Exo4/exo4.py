@@ -35,7 +35,7 @@ def temps_de_vol(n:int):
     """    
     return len(syracuse(n))-1
     
-print(temps_de_vol(45644))
+# print(temps_de_vol(45640))
 
 def temps_de_vol_avec_precalcul(n:int, temps_connus:dict):
     if n in temps_connus.keys():
@@ -53,7 +53,7 @@ def temps_de_vol_avec_precalcul(n:int, temps_connus:dict):
         else:
             return temps_vol
 
-print(temps_de_vol_avec_precalcul(45644, {}))
+# print(temps_de_vol_avec_precalcul(45640, {}))
 
 def champion(n:int):
     start_time = time.time()
@@ -79,8 +79,8 @@ def champion_v2(n:int, temps_connus:dict):
     end_time = time.time()
     return champion, f'Time elapsed: {end_time - start_time} seconds'
 
-print(champion(124))
-print(champion_v2(124, temps_connus))
+print(champion(45640))
+# print(champion_v2(124, temps_connus))
 
 # print(champion(124))
-# 45644
+# 45640

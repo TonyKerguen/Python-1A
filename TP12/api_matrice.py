@@ -65,6 +65,34 @@ def get_nombre_de_lignes(matrice):
     """    
     return len(matrice)
 
+def get_ligne(matrice, num_ligne):
+    """_summary_
+
+    Args:
+        matrice (_type_): _description_
+        num_ligne (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """    
+    return matrice[num_ligne]
+
+def get_colonne(matrice, num_colonne):
+    """_summary_
+
+    Args:
+        matrice (_type_): _description_
+        num_colonne (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """    
+    res = []
+    i = num_colonne
+    while i < len(matrice[2]):
+        res.append(matrice[2][i])
+        i += matrice[1]
+    return res
 
 def enregistre_matrice(matrice, nom_fichier):
     """résumé :

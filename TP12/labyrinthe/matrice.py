@@ -3,6 +3,8 @@ Une implémentation des matrices 2D en python
 Détailler ici la modélisation choisie en donnant au moins un exemple
 """
 
+import api_matrice as api
+
 def new_matrice(nb_lignes, nb_colonnes, valeur_par_defaut=0):
     """Construit et une nouvelle matrice
 
@@ -17,7 +19,7 @@ def new_matrice(nb_lignes, nb_colonnes, valeur_par_defaut=0):
                  est nb_colonnes
         et dont toutes les valeurs sont à valeur_par_defaut
     """
-    ...
+    return api.creer_matrice(nb_lignes, nb_colonnes)
 
 def get_nb_lignes(matrice):
     """renvoie le nombre de lignes de la matrice
