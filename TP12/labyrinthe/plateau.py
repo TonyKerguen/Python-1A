@@ -29,7 +29,24 @@ def init(nom_fichier="./labyrinthe1.txt"):
     Returns:
         le plateau de jeu avec les MUR, COULOIR, PERSONNAGE et FANTOME
     """
-    ...
+    # plateau = dict()
+    # fic = open(nom_fichier, 'r', encoding="utf-8")
+    # l = 0
+    # for ligne in fic:
+    #     c = 0
+    #     for colonne in ligne[:-1].split(","):
+    #         plateau[(l, c)] = colonne
+    #         c += 1
+    #     l += 1
+    # plateau[(0, 0)] = PERSONNAGE
+    # plateau[(l-1, c-1)] = FANTOME
+    # return plateau
+    plateau = matrice.charge_matrice(nom_fichier)
+    matrice.set_val(plateau, 0, 0, PERSONNAGE)
+    matrice.set_val(plateau, matrice.get_nb_lignes(plateau)-1, matrice.get_nb_colonnes(plateau)-1, FANTOME)
+    return plateau
+
+print(init())
 
 
 def est_sur_le_plateau(le_plateau, position):
@@ -42,8 +59,15 @@ def est_sur_le_plateau(le_plateau, position):
     Returns:
         [boolean]: True si la position est bien sur le plateau
     """
-    ...
-
+    if position[0] >= 0 and position[1] >= 0:
+        if matrice.get_val(le_plateau,  position[0], position[1]) != None:
+            return True
+        else:
+            return False
+    else:
+        return False
+    
+print(est_sur_le_plateau(init(), (3, 10)))
 
 def get(le_plateau, position):
     """renvoie la valeur de la case qui se trouve à la position donnée
@@ -56,7 +80,7 @@ def get(le_plateau, position):
         int: la valeur de la case qui se trouve à la position donnée ou
              None si la position n'est pas sur le plateau
     """
-    ...
+    return matrice.get_val(le_plateau,  position[0], position[1])
 
 
 def est_un_mur(le_plateau, position):
@@ -69,7 +93,7 @@ def est_un_mur(le_plateau, position):
     Returns:
         bool: True si la case à la position donnée est un MUR, False sinon
     """
-    ...
+    return matrice.get_val(le_plateau,  position[0], position[1]) == MUR
 
 
 def contient_fantome(le_plateau, position):
@@ -82,7 +106,7 @@ def contient_fantome(le_plateau, position):
     Returns:
         bool: True si la case à la position donnée est un FANTOME, False sinon
     """
-    ...
+    return matrice.get_val(le_plateau,  position[0], position[1]) == FANTOME
 
 def est_la_sortie(le_plateau, position):
     """Détermine si la position donnée est la sortie
@@ -95,7 +119,7 @@ def est_la_sortie(le_plateau, position):
     Returns:
         bool: True si la case à la position donnée est la sortie, False sinon
     """
-    ...
+    return position[0] == matrice.get_nb_lignes(le_plateau)-1 and position[1] == matrice.get_nb_colonnes(le_plateau)-1
 
 
 def deplace_personnage(le_plateau, personnage, direction):
@@ -111,8 +135,27 @@ def deplace_personnage(le_plateau, personnage, direction):
     Returns:
         [tuple]: la nouvelle position du personnage
     """
-    ...
+    if direction == NORD and not est_un_mur(le_plateau, (personnage[0]-1, personnage[1])) and est_sur_le_plateau(le_plateau, (personnage[0]-1, personnage[1])):
+        matrice.set_val(le_plateau, personnage[0], personnage[1], COULOIR)
+        personnage = (personnage[0]-1, personnage[1])
+        matrice.set_val(le_plateau, personnage[0], personnage[1], PERSONNAGE)
 
+    if direction == SUD and not est_un_mur(le_plateau, (personnage[0]+1, personnage[1])) and est_sur_le_plateau(le_plateau, (personnage[0]+1, personnage[1])):
+        matrice.set_val(le_plateau, personnage[0], personnage[1], COULOIR)
+        personnage = (personnage[0]+1, personnage[1])
+        matrice.set_val(le_plateau, personnage[0], personnage[1], PERSONNAGE)
+
+    if direction == OUEST and not est_un_mur(le_plateau, (personnage[0], personnage[1]-1)) and est_sur_le_plateau(le_plateau, (personnage[0], personnage[1]-1)):
+        matrice.set_val(le_plateau, personnage[0], personnage[1], COULOIR)
+        personnage = (personnage[0], personnage[1]-1)
+        matrice.set_val(le_plateau, personnage[0], personnage[1], PERSONNAGE)
+
+    if direction == EST and not est_un_mur(le_plateau, (personnage[0], personnage[1]+1)) and est_sur_le_plateau(le_plateau, (personnage[0], personnage[1]+1)):
+        matrice.set_val(le_plateau, personnage[0], personnage[1], COULOIR)
+        personnage = (personnage[0], personnage[1]+1)
+        matrice.set_val(le_plateau, personnage[0], personnage[1], PERSONNAGE)
+
+    return personnage
 
 def voisins(le_plateau, position):
     """Renvoie l'ensemble des positions cases voisines accessibles de la position renseignées
@@ -124,7 +167,21 @@ def voisins(le_plateau, position):
     Returns:
         set: l'ensemble des positions des cases voisines accessibles
     """
-    ...
+    accessibles = set()
+
+    if not est_un_mur(le_plateau, (position[0]-1, position[1])) and est_sur_le_plateau(le_plateau, (position[0]-1, position[1])):
+        accessibles.add((position[0]-1, position[1]))
+
+    if not est_un_mur(le_plateau, (position[0]+1, position[1])) and est_sur_le_plateau(le_plateau, (position[0]+1, position[1])):
+        accessibles.add((position[0]+1, position[1]))
+
+    if not est_un_mur(le_plateau, (position[0], position[1]-1)) and est_sur_le_plateau(le_plateau, (position[0], position[1]-1)):
+        accessibles.add((position[0], position[1]-1))
+
+    if not est_un_mur(le_plateau, (position[0], position[1]+1)) and est_sur_le_plateau(le_plateau, (position[0], position[1]+1)):
+        accessibles.add((position[0], position[1]+1))
+
+    return accessibles
 
 
 def fabrique_le_calque(le_plateau, position_depart):
@@ -139,7 +196,21 @@ def fabrique_le_calque(le_plateau, position_depart):
        position_de_depart est à 0 les autres cases contiennent la longueur du
        plus court chemin pour y arriver (les murs et les cases innaccessibles sont à None)
     """
-    ...
+    calque = matrice.new_matrice(matrice.get_nb_lignes(le_plateau), matrice.get_nb_colonnes(le_plateau), None)
+    matrice.set_val(calque, position_depart[0], position_depart[1], 0)
+    inondation = True
+    actu = -1
+    while inondation:
+        inondation = False
+        actu += 1
+        for l in range(matrice.get_nb_lignes(calque)-1):
+            for c in range(matrice.get_nb_colonnes(calque)-1):
+                if get(calque, (l, c)) == actu:
+                    for voisin in voisins(le_plateau, (l, c)):
+                        if get(calque, voisin) == None:
+                            matrice.set_val(calque, voisin[0], voisin[1], actu+1)
+                            inondation = True
+    return calque
 
 
 def fabrique_chemin(le_plateau, position_depart, position_arrivee):

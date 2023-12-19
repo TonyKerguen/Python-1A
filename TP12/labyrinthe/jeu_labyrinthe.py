@@ -9,6 +9,7 @@ def affiche_menu1():
     """Affiche le premier menu en sortie standart"""
     print(' ===== MON SUPER JEU =====')
     print(' (J)ouer ?')
+    print(' (A)utre labyrinthe ?')
     print(' (Q)uitter ?')
 
 

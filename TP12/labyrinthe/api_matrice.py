@@ -29,9 +29,12 @@ def get_valeur(matrice, ligne, colonne):
 
     Retourne:
         _type_: 
-    """    
-    return matrice[ligne][colonne]
-
+    """
+    try: 
+        return matrice[ligne][colonne]
+    except:
+        return None
+    
 def set_valeur(matrice, ligne, colonne, valeur):
     """résumé :
 
