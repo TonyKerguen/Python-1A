@@ -12,6 +12,12 @@ def affiche_menu1():
     print(' (A)utre labyrinthe ?')
     print(' (Q)uitter ?')
 
+def affiche_menudif():
+    print(' ===== MODE DE JEU =====')
+    print(' (N)ormal ?')
+    print(' (F)lash ?')
+    print(' (E)xpert ?')
+
 
 def affiche_menu2():
     """Affiche le deuxième menu (pour jouer) sur la sortie standart"""
@@ -59,7 +65,14 @@ def lance_menu():
         if caractere.upper() == 'Q':
             quitte = True
         elif caractere.upper() == 'J':
-            joue()
+            affiche_menudif()
+            caractere = saisie_un_seul_caractere()
+            if caractere.upper() == 'N':
+                joue()
+            elif caractere.upper() == 'F':
+                joue("F")
+            elif caractere.upper() == 'E':
+                joue("E")
 
 
 def affiche_message(message, affichage_graphique=None):
@@ -84,21 +97,31 @@ def fin_du_jeu(gagne, affichage_graphique=None):
     lance_menu()
 
 
-def joue():
+def joue(mode = "N"):
     """Permet de lancer le jeu du labyrinthe et y jouer"""
     mon_plateau = plateau.init()
     personnage = (0, 0)
-    fantome = (matrice.get_nb_lignes(mon_plateau) - 1, matrice.get_nb_colonnes(mon_plateau) - 1)
+    fantome1 = (matrice.get_nb_lignes(mon_plateau) - 1, matrice.get_nb_colonnes(mon_plateau) - 1)
+    fantome2 = None
+    if mode == "E":
+        fantome2 = (2, 7)
     sortie = (matrice.get_nb_lignes(mon_plateau) - 1, matrice.get_nb_colonnes(mon_plateau) - 1)
-    affichage_graphique = None
+    affichage_graphique = matrice_graphique.MatriceGraphique(mon_plateau)
     affiche_jeu(mon_plateau, affichage_graphique)
     quitte = False
     while not quitte:
         direction = saisie_un_seul_caractere()
         personnage = plateau.deplace_personnage(mon_plateau, personnage, direction)
-        fantome = plateau.deplace_fantome(mon_plateau, fantome, personnage)
+        if mode == "N":
+            fantome1 = plateau.deplace_fantome(mon_plateau, fantome1, personnage)
+        elif mode == "F":
+            fantome1 = plateau.deplace_fantome(mon_plateau, fantome1, personnage)
+            fantome1 = plateau.deplace_fantome(mon_plateau, fantome1, personnage)
+        elif mode == "E":
+            fantome1 = plateau.deplace_fantome(mon_plateau, fantome1, personnage)
+            fantome2 = plateau.deplace_fantome(mon_plateau, fantome2, personnage)
         affiche_jeu(mon_plateau, affichage_graphique)
-        if personnage == fantome:
+        if personnage == fantome1 or personnage == fantome2:
             fin_du_jeu(False, affichage_graphique)
             quitte = True
         elif personnage == sortie:
@@ -106,4 +129,4 @@ def joue():
             quitte = True
 
 
-joue()
+lance_menu()

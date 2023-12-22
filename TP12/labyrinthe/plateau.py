@@ -13,8 +13,8 @@ FANTOME = 3
 
 NORD = 'z'
 OUEST = 'q'
-SUD = 'w'
-EST = 's'
+SUD = 's'
+EST = 'd'
 
 
 def init(nom_fichier="/home/iut45/Etudiants/o22205496/home_iut/INIT_PROG/Python-1A/TP12/labyrinthe/labyrinthe1.txt"):

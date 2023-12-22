@@ -18,7 +18,7 @@ class MatriceGraphique(object):
         self.surface = pygame.display.get_surface()
         self.mise_a_jour_parametres()
         self.dico_images = {}
-        self.set_dico("dico.txt","./img/")
+        self.set_dico("TP12/labyrinthe/dico.txt","TP12/labyrinthe/img/")
 
     def set_dico(self, nom_fichier, dossier_image="./"):
         self.dico_images = {}
