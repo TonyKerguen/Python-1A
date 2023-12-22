@@ -1,7 +1,7 @@
 import random
 import csv
 
-def creer_matrice(ligne, colonne):
+def creer_matrice(ligne, colonne, valeur_par_defaut=0):
     """résumé :
 
     Args:
@@ -15,7 +15,7 @@ def creer_matrice(ligne, colonne):
     for i in range(ligne):
         ligne_matrice = []
         for j in range(colonne):
-            ligne_matrice.append(random.randint(0, 100))
+            ligne_matrice.append(valeur_par_defaut)
         matrice.append(ligne_matrice)
     return matrice
 

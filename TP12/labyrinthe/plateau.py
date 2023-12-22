@@ -17,7 +17,7 @@ SUD = 'w'
 EST = 's'
 
 
-def init(nom_fichier="./labyrinthe1.txt"):
+def init(nom_fichier="/home/iut45/Etudiants/o22205496/home_iut/INIT_PROG/Python-1A/TP12/labyrinthe/labyrinthe1.txt"):
     """Construit le plateau de jeu de la façon suivante :
         - crée une matrice à partir d'un fichier texte qui contient des COULOIR et MUR
         - met le PERSONNAGE en haut à gauche cad à la position (0, 0)
@@ -46,7 +46,7 @@ def init(nom_fichier="./labyrinthe1.txt"):
     matrice.set_val(plateau, matrice.get_nb_lignes(plateau)-1, matrice.get_nb_colonnes(plateau)-1, FANTOME)
     return plateau
 
-print(init())
+# print(init())
 
 
 def est_sur_le_plateau(le_plateau, position):
@@ -67,7 +67,7 @@ def est_sur_le_plateau(le_plateau, position):
     else:
         return False
     
-print(est_sur_le_plateau(init(), (3, 10)))
+# print(est_sur_le_plateau(init(), (3, 10)))
 
 def get(le_plateau, position):
     """renvoie la valeur de la case qui se trouve à la position donnée
@@ -199,19 +199,18 @@ def fabrique_le_calque(le_plateau, position_depart):
     calque = matrice.new_matrice(matrice.get_nb_lignes(le_plateau), matrice.get_nb_colonnes(le_plateau), None)
     matrice.set_val(calque, position_depart[0], position_depart[1], 0)
     inondation = True
-    actu = -1
+    actu = 0
     while inondation:
         inondation = False
-        actu += 1
-        for l in range(matrice.get_nb_lignes(calque)-1):
-            for c in range(matrice.get_nb_colonnes(calque)-1):
+        for l in range(matrice.get_nb_lignes(calque)):
+            for c in range(matrice.get_nb_colonnes(calque)):
                 if get(calque, (l, c)) == actu:
                     for voisin in voisins(le_plateau, (l, c)):
-                        if get(calque, voisin) == None:
+                        if get(calque, voisin) == None and not est_un_mur(le_plateau,voisin):
                             matrice.set_val(calque, voisin[0], voisin[1], actu+1)
                             inondation = True
+        actu += 1
     return calque
-
 
 def fabrique_chemin(le_plateau, position_depart, position_arrivee):
     """Renvoie le plus court chemin entre position_depart position_arrivee
@@ -225,7 +224,19 @@ def fabrique_chemin(le_plateau, position_depart, position_arrivee):
         list: Une liste de positions entre position_arrivee et position_depart
         qui représente un plus court chemin entre les deux positions
     """
-    ...
+    res = []
+    calque = fabrique_le_calque(le_plateau, position_arrivee)
+    pos_actu = position_depart
+    while pos_actu != position_arrivee:
+        trouve = False
+        for voisin in voisins(le_plateau, pos_actu):
+            if get(calque, voisin) == get(calque, pos_actu)-1 and not trouve:
+                pos_actu = voisin
+                trouve = True
+                res.insert(0, pos_actu)
+    if res == []:
+        res.append(position_depart)
+    return res
 
 
 def deplace_fantome(le_plateau, fantome, personnage):
@@ -239,4 +250,7 @@ def deplace_fantome(le_plateau, fantome, personnage):
     Returns:
         [tuple]: la nouvelle position du FANTOME
     """
-    ...
+    new_pos = fabrique_chemin(le_plateau, fantome, personnage)[-1]
+    matrice.set_val(le_plateau, fantome[0], fantome[1], COULOIR)
+    matrice.set_val(le_plateau, new_pos[0], new_pos[1], FANTOME)
+    return new_pos

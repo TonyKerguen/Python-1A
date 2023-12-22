@@ -19,7 +19,7 @@ def new_matrice(nb_lignes, nb_colonnes, valeur_par_defaut=0):
                  est nb_colonnes
         et dont toutes les valeurs sont à valeur_par_defaut
     """
-    return api.creer_matrice(nb_lignes, nb_colonnes)
+    return api.creer_matrice(nb_lignes, nb_colonnes, valeur_par_defaut)
 
 def get_nb_lignes(matrice):
     """renvoie le nombre de lignes de la matrice
