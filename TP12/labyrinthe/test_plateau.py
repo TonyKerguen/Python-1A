@@ -91,6 +91,7 @@ def test_fabrique_chemin():
                                                                    (5, 7), (4, 7), (4, 6)]
     assert plateau.fabrique_chemin(le_plateau, (5, 3), (8, 8)) == [(8, 8), (8, 7), (7, 7), (7, 6), 
                                                                    (7, 5), (7, 4), (7, 3), (6, 3)]
+    assert plateau.fabrique_chemin(matrice.charge_matrice("./plateau1_pour_tests.csv"), (0, 8), (8, 8)) is None
 
 
 def test_deplace_fantome():

@@ -42,9 +42,13 @@ def init(nom_fichier="/home/iut45/Etudiants/o22205496/home_iut/INIT_PROG/Python-
     # plateau[(l-1, c-1)] = FANTOME
     # return plateau
     plateau = matrice.charge_matrice(nom_fichier)
-    matrice.set_val(plateau, 0, 0, PERSONNAGE)
-    matrice.set_val(plateau, matrice.get_nb_lignes(plateau)-1, matrice.get_nb_colonnes(plateau)-1, FANTOME)
-    return plateau
+    if nom_fichier != "/home/iut45/Etudiants/o22205496/home_iut/INIT_PROG/Python-1A/TP12/labyrinthe/labyrinthe1.txt":
+        return plateau
+    else:
+        matrice.set_val(plateau, 0, 0, PERSONNAGE)
+        matrice.set_val(plateau, matrice.get_nb_lignes(plateau)-1, matrice.get_nb_colonnes(plateau)-1, FANTOME)
+        return plateau
+    
 
 # print(init())
 
@@ -122,7 +126,7 @@ def est_la_sortie(le_plateau, position):
     return position[0] == matrice.get_nb_lignes(le_plateau)-1 and position[1] == matrice.get_nb_colonnes(le_plateau)-1
 
 
-def deplace_personnage(le_plateau, personnage, direction):
+def deplace_personnage(le_plateau, personnage, direction, mode = "N"):
     """déplace le PERSONNAGE sur le plateau si le déplacement est valide
        Le personnage ne peut pas sortir du plateau ni traverser les murs
        Si le déplacement n'est pas valide, le personnage reste sur place
@@ -135,27 +139,50 @@ def deplace_personnage(le_plateau, personnage, direction):
     Returns:
         [tuple]: la nouvelle position du personnage
     """
-    if direction == NORD and not est_un_mur(le_plateau, (personnage[0]-1, personnage[1])) and est_sur_le_plateau(le_plateau, (personnage[0]-1, personnage[1])):
-        matrice.set_val(le_plateau, personnage[0], personnage[1], COULOIR)
-        personnage = (personnage[0]-1, personnage[1])
-        matrice.set_val(le_plateau, personnage[0], personnage[1], PERSONNAGE)
+    if mode == "N":
+        if direction == NORD and not est_un_mur(le_plateau, (personnage[0]-1, personnage[1])) and est_sur_le_plateau(le_plateau, (personnage[0]-1, personnage[1])):
+            matrice.set_val(le_plateau, personnage[0], personnage[1], COULOIR)
+            personnage = (personnage[0]-1, personnage[1])
+            matrice.set_val(le_plateau, personnage[0], personnage[1], PERSONNAGE)
 
-    if direction == SUD and not est_un_mur(le_plateau, (personnage[0]+1, personnage[1])) and est_sur_le_plateau(le_plateau, (personnage[0]+1, personnage[1])):
-        matrice.set_val(le_plateau, personnage[0], personnage[1], COULOIR)
-        personnage = (personnage[0]+1, personnage[1])
-        matrice.set_val(le_plateau, personnage[0], personnage[1], PERSONNAGE)
+        if direction == SUD and not est_un_mur(le_plateau, (personnage[0]+1, personnage[1])) and est_sur_le_plateau(le_plateau, (personnage[0]+1, personnage[1])):
+            matrice.set_val(le_plateau, personnage[0], personnage[1], COULOIR)
+            personnage = (personnage[0]+1, personnage[1])
+            matrice.set_val(le_plateau, personnage[0], personnage[1], PERSONNAGE)
 
-    if direction == OUEST and not est_un_mur(le_plateau, (personnage[0], personnage[1]-1)) and est_sur_le_plateau(le_plateau, (personnage[0], personnage[1]-1)):
-        matrice.set_val(le_plateau, personnage[0], personnage[1], COULOIR)
-        personnage = (personnage[0], personnage[1]-1)
-        matrice.set_val(le_plateau, personnage[0], personnage[1], PERSONNAGE)
+        if direction == OUEST and not est_un_mur(le_plateau, (personnage[0], personnage[1]-1)) and est_sur_le_plateau(le_plateau, (personnage[0], personnage[1]-1)):
+            matrice.set_val(le_plateau, personnage[0], personnage[1], COULOIR)
+            personnage = (personnage[0], personnage[1]-1)
+            matrice.set_val(le_plateau, personnage[0], personnage[1], PERSONNAGE)
 
-    if direction == EST and not est_un_mur(le_plateau, (personnage[0], personnage[1]+1)) and est_sur_le_plateau(le_plateau, (personnage[0], personnage[1]+1)):
-        matrice.set_val(le_plateau, personnage[0], personnage[1], COULOIR)
-        personnage = (personnage[0], personnage[1]+1)
-        matrice.set_val(le_plateau, personnage[0], personnage[1], PERSONNAGE)
+        if direction == EST and not est_un_mur(le_plateau, (personnage[0], personnage[1]+1)) and est_sur_le_plateau(le_plateau, (personnage[0], personnage[1]+1)):
+            matrice.set_val(le_plateau, personnage[0], personnage[1], COULOIR)
+            personnage = (personnage[0], personnage[1]+1)
+            matrice.set_val(le_plateau, personnage[0], personnage[1], PERSONNAGE)
 
-    return personnage
+        return personnage
+    if mode == "I":
+        if direction == NORD and not est_un_mur(le_plateau, (personnage[0]-1, personnage[1])) and est_sur_le_plateau(le_plateau, (personnage[0]-1, personnage[1])):
+            matrice.set_val(le_plateau, personnage[0], personnage[1], COULOIR)
+            personnage = (personnage[0]-1, personnage[1])
+            matrice.set_val(le_plateau, personnage[0], personnage[1], 4)
+
+        if direction == SUD and not est_un_mur(le_plateau, (personnage[0]+1, personnage[1])) and est_sur_le_plateau(le_plateau, (personnage[0]+1, personnage[1])):
+            matrice.set_val(le_plateau, personnage[0], personnage[1], COULOIR)
+            personnage = (personnage[0]+1, personnage[1])
+            matrice.set_val(le_plateau, personnage[0], personnage[1], 4)
+
+        if direction == OUEST and not est_un_mur(le_plateau, (personnage[0], personnage[1]-1)) and est_sur_le_plateau(le_plateau, (personnage[0], personnage[1]-1)):
+            matrice.set_val(le_plateau, personnage[0], personnage[1], COULOIR)
+            personnage = (personnage[0], personnage[1]-1)
+            matrice.set_val(le_plateau, personnage[0], personnage[1], 4)
+
+        if direction == EST and not est_un_mur(le_plateau, (personnage[0], personnage[1]+1)) and est_sur_le_plateau(le_plateau, (personnage[0], personnage[1]+1)):
+            matrice.set_val(le_plateau, personnage[0], personnage[1], COULOIR)
+            personnage = (personnage[0], personnage[1]+1)
+            matrice.set_val(le_plateau, personnage[0], personnage[1], 4)
+
+        return personnage
 
 def voisins(le_plateau, position):
     """Renvoie l'ensemble des positions cases voisines accessibles de la position renseignées
@@ -227,13 +254,18 @@ def fabrique_chemin(le_plateau, position_depart, position_arrivee):
     res = []
     calque = fabrique_le_calque(le_plateau, position_arrivee)
     pos_actu = position_depart
-    while pos_actu != position_arrivee:
+    boucle_infinie = False
+    while pos_actu != position_arrivee and not boucle_infinie:
         trouve = False
+        boucle_infinie = True
         for voisin in voisins(le_plateau, pos_actu):
             if get(calque, voisin) == get(calque, pos_actu)-1 and not trouve:
                 pos_actu = voisin
                 trouve = True
+                boucle_infinie = False
                 res.insert(0, pos_actu)
+    if boucle_infinie:
+        return None
     if res == []:
         res.append(position_depart)
     return res
