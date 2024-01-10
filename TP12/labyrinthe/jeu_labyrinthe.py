@@ -121,27 +121,17 @@ def joue(mode = "N"):
         fantome14 = (8, 2)
         fantome15 = (8, 4)
         fantome16 = (8, 6)
-    if mode == "N":
-        mon_plateau = plateau.init()
-        personnage = (0, 0)
-        fantome1 = (matrice.get_nb_lignes(mon_plateau) - 1, matrice.get_nb_colonnes(mon_plateau) - 1)
-        fantome2 = None
-        fantome3 = None
-        fantome4 = None
-        fantome5 = None
-        fantome6 = None
-        fantome7 = None
-        fantome8 = None
-        fantome9 = None
-        fantome10 = None
-        fantome11 = None
-        fantome12 = None
-        fantome13 = None
-        fantome14 = None
-        fantome15 = None
-        fantome16 = None
-    if mode == "E":
-        fantome2 = (2, 7)
+    else:
+        if mode == "F" or mode == "N":
+            mon_plateau = plateau.init()
+            personnage = (0, 0)
+            fantome1 = (matrice.get_nb_lignes(mon_plateau) - 1, matrice.get_nb_colonnes(mon_plateau) - 1)
+            fantome2 = None
+        if mode == "E":
+            mon_plateau = plateau.init()
+            personnage = (0, 0)
+            fantome1 = (matrice.get_nb_lignes(mon_plateau) - 1, matrice.get_nb_colonnes(mon_plateau) - 1)
+            fantome2 = (2, 7)
         fantome3 = None
         fantome4 = None
         fantome5 = None
